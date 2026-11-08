@@ -26,6 +26,7 @@ export interface Approbation {
   cree_le: string;
   deleted_at: string | null;
   note?: string;
+  updated_at?: string;
 }
 
 export interface MouvementStock {
@@ -37,6 +38,7 @@ export interface MouvementStock {
   ancien_stock: number;
   nouveau_stock: number;
   motif?: string;
+  note?: string; // <--- Ajouté ici pour correspondre à StockMouvements.tsx
   cree_le: string;
 }
 

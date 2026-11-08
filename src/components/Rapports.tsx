@@ -12,7 +12,7 @@ export const Rapports: React.FC = () => {
     totalTransactions: 0,
   });
   const [periodeCA, setPeriodeCA] = useState<7 | 14 | 30>(14);
-  const [ventesPeriode, setVentesPeriode] = useState<any[]>([]);
+  const [_ventesPeriode, setVentesPeriode] = useState<any[]>([]);
   const [topProduits, setTopProduits] = useState<{ nom: string; total: number }[]>([]);
   const [donneesGraphique, setDonneesGraphique] = useState<{ date: string; montant: number; label: string }[]>([]);
   const [dateCible, setDateCible] = useState<string>('');

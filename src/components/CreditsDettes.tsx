@@ -45,7 +45,8 @@ export const CreditsDettes: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-6 text-[#e8e6e1] pb-12 px-2 sm:px-0">
+    <div className="space-y-4 text-[#e8e6e1] pb-12 px-1 sm:px-0">
+      {/* En-tête du module */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#232830] pb-4 gap-3">
         <div>
           <h3 className="text-sm font-semibold text-[#d8b45c]">Module : Crédits Clients</h3>
@@ -60,29 +61,31 @@ export const CreditsDettes: React.FC = () => {
       </div>
 
       {loading ? (
-        <p className="text-center text-[#9aa0aa] py-12">Connexion à la base de données...</p>
+        <p className="text-center text-[#9aa0aa] py-12 text-xs sm:text-sm">Connexion à la base de données...</p>
       ) : items.length === 0 ? (
         <div className="bg-[#11141a] p-8 rounded-xl border border-[#232830] text-center space-y-2">
-          <p className="text-white font-medium text-sm">Aucun dossier de crédit enregistré.</p>
+          <p className="text-white font-medium text-xs sm:text-sm">Aucun dossier de crédit enregistré.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {items.map((item, index) => {
             const isSolde = item.statut && item.statut.toLowerCase() === 'soldee';
             return (
-              <div key={item.id || index} className="bg-[#11141a] p-4 rounded-xl border border-[#232830] flex justify-between items-center">
-                <div>
-                  <span className="text-[10px] uppercase px-2 py-0.5 rounded bg-[#232830] text-[#c9a44a] font-semibold">
-                    Client ID : {item.client_id ? `${item.client_id.substring(0, 8)}...` : 'N/A'}
+              <div key={item.id || index} className="bg-[#11141a] p-4 rounded-xl border border-[#232830] flex justify-between items-center gap-3">
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] uppercase px-2 py-0.5 rounded bg-[#232830] text-[#c9a44a] font-semibold inline-block">
+                    Client : {item.client_id ? `${item.client_id.substring(0, 6)}...` : 'N/A'}
                   </span>
-                  <h4 className="font-bold text-white text-base mt-1">Vente : #{item.vente_id ? item.vente_id.substring(0, 8) : 'N/A'}</h4>
-                  <p className="text-xs text-[#9aa0aa]">
+                  <h4 className="font-bold text-white text-sm sm:text-base mt-1.5 truncate">
+                    Vente : #{item.vente_id ? item.vente_id.substring(0, 8) : 'N/A'}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-[#9aa0aa] mt-0.5">
                     Mise à jour : {item.updated_at ? new Date(item.updated_at).toLocaleString('fr-FR') : 'N/A'}
                   </p>
                 </div>
-                <div className="text-right">
-                  <span className="text-[#34c77b] font-bold text-base block">{formatFCFA(item.montant)}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded border capitalize inline-block mt-1 ${
+                <div className="text-right shrink-0">
+                  <span className="text-[#34c77b] font-bold text-sm sm:text-base block">{formatFCFA(item.montant)}</span>
+                  <span className={`text-[10px] sm:text-xs px-2 py-0.5 rounded border capitalize inline-block mt-1 ${
                     isSolde 
                       ? 'bg-[#34c77b]/10 text-[#34c77b] border-[#34c77b]/30' 
                       : 'bg-[#e05656]/10 text-[#e05656] border-[#e05656]/30'
